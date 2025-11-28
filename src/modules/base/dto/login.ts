@@ -19,3 +19,16 @@ export class LoginDTO {
   @Rule(RuleType.required())
   verifyCode: number;
 }
+
+/**
+ * 账号密码登录参数校验
+ */
+export class LoginByPasswordDTO {
+  // 用户名
+  @Rule(RuleType.string().required())
+  username: string;
+
+  // 密码
+  @Rule(RuleType.string().required())
+  password: string;
+}

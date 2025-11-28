@@ -8,7 +8,7 @@ import {
   TagTypes,
   RESCODE,
 } from '@cool-midway/core';
-import { LoginDTO } from '../../dto/login';
+import { LoginDTO, LoginByPasswordDTO } from '../../dto/login';
 import { BaseSysLoginService } from '../../service/sys/login';
 import { BaseSysParamService } from '../../service/sys/param';
 import { Context } from '@midwayjs/koa';
@@ -61,6 +61,17 @@ export class BaseOpenController extends BaseController {
   @Validate()
   async login(@Body() login: LoginDTO) {
     return this.ok(await this.baseSysLoginService.login(login));
+  }
+
+  /**
+   * 登录(无需验证码)
+   * @param login
+   */
+  @CoolTag(TagTypes.IGNORE_TOKEN)
+  @Post('/loginByPassword', { summary: '登录(无需验证码)' })
+  @Validate()
+  async loginByPassword(@Body() login: LoginByPasswordDTO) {
+    return this.ok(await this.baseSysLoginService.loginByPassword(login));
   }
 
   /**
